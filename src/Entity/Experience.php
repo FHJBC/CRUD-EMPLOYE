@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ExperienceRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,11 +20,13 @@ class Experience
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"post"})
      */
     private $titre;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"post"})
      */
     private $description;
 

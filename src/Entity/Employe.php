@@ -4,12 +4,16 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EmployeRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      denormalizationContext={"groups"={"post"}}
+ * )
  * @ORM\Entity(repositoryClass=EmployeRepository::class)
  */
 class Employe
@@ -23,26 +27,31 @@ class Employe
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Groups({"post"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Groups({"post"})
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="smallint")
+     * * @Groups({"post"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Groups({"post"})
      */
     private $poste;
 
     /**
-     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="employe", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Experience::class, mappedBy="employe", orphanRemoval=true, cascade={"persist", "remove"})
+     * * @Groups({"post"})
      */
     private $experience;
 
